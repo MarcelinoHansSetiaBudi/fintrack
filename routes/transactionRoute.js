@@ -7,5 +7,6 @@ router.route("/index").get(index);
 router.route("/show/:id").get(show);
 router.route("/insert").post(insert);
 router.route("/update/:id").put(update);
+router.route("/delete/:id").delete(destroy);
 
 module.exports = router;

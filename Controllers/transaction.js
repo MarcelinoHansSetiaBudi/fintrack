@@ -93,7 +93,7 @@ const insert = async (req, res) => {
     // await client.query('COMMIT');
     const relatedData = transactionType === "pemasukkan" ? { salary_data: createSalary } : { expanditure_data: createExpanditure };
 
-    return res.status(200).json({
+    return res.status(201).json({
       status: `success creating transaction and ${transactionType === "pemasukkan" ? 'salary' : 'expanditure'} data`,
       transaction_data: insert,
       ...relatedData,
@@ -138,7 +138,28 @@ const update = async (req, res) => {
   }
 };
 
-const destroy = async (req, res) => {};
+// delete by pk
+const destroy = async (req, res) => {
+  const { id } = req.params;
+  const data = await models.Transaction.findByPk(id);
+
+  if(data)
+  {
+    await data.destroy();
+
+    return res.status(200).json({
+      status: "success",
+      message: "Data deleted successfully"
+    });
+  }
+  else
+  {
+    return res.status(404).json({
+      status: "error",
+      message: "Data not found"
+    });
+  }
+};
 
 module.exports = {
   index,
