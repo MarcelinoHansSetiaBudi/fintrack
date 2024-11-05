@@ -8,14 +8,16 @@ const morgan = require("morgan");
 app.use(morgan("dev"));
 app.use(express.json());
 
-// const { authenticateToken } = require("./middleware/auth");
+const { authenticateToken } = require("./middleware/auth");
 
 // router
 const userRouter = require("./routes/userRoute");
 const transactionRouter = require("./routes/transactionRoute");
+const salaryRoute = require("./routes/salaryRoute")
 
 app.use("/api/users", userRouter);
-app.use("/api/transaction", transactionRouter);
+app.use("/api/transaction", authenticateToken, transactionRouter);
+app.use("/api/salaries", authenticateToken, salaryRoute);
 
 app.listen(process.env.PORT, () => {
   console.log("Server is running on port " + process.env.PORT);

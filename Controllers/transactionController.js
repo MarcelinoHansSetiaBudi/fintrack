@@ -11,7 +11,6 @@ const Expanditure = require("../models/expanditure");
 // const client      = await pool.connect()
 
 const index = async (req, res) => {
-  console.log(123);
   try {
     let datas = await models.Transaction.findAll();
 
