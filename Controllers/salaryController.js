@@ -100,9 +100,40 @@ const update = async (req, res) => {
     }
 }
 
+const destroy = async (req, res) => {
+    const { id } = req.params;
+
+    try{
+        const salary = await models.Salaries.findByPk(id);
+
+        if(!salary)
+        {
+            return res.status(500).json({
+                status: "error",
+                message: "Data not found"
+            });
+        }
+
+        await salary.destroy();
+
+        return res.status(200).json({
+            status: "success",
+            message: "Data deleted successfully"
+        })
+
+    }
+    catch (error) {
+        console.log(error);
+        return res.status(500).json({ 
+            message: error.message 
+        })
+    }
+}
+
 module.exports = {
     index,
     show,
     insert,
-    update
+    update,
+    destroy
 }
