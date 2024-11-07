@@ -72,21 +72,25 @@ const update = async (req, res) => {
     const { id } = req.params;
 
     try{
-        const data = await models.Salaries.findByPk(id);
+        const salary = await models.Salaries.findByPk(id);
         if(!data){
-            console.log(123);
-            console.log(data);
             return res.status(404).json({
                 status: "error",
                 message: "Data not found"
             });
         }
         else{
-            console.log(data);
+            salary.salary_type  =   request.salary_type;
+            salary.amount       =   request.amount;
+            salary.date         =   request.date;
+            salary.updatedAt    =   new Date();
+
+            await salary.update();
+
             return res.status(200).json({
                 status: "success",
                 data: data
-            })
+            });
         }
     } catch (error) {
         console.log(erorr);
