@@ -16,7 +16,7 @@ module.exports = (sequelize, DataTypes) => {
   Expanditure.init({
     transactionId: DataTypes.INTEGER,
     expanditure_type: DataTypes.STRING,
-    amoung: DataTypes.DECIMAL,
+    amount: DataTypes.DECIMAL,
     date: DataTypes.DATE,
     created_by: DataTypes.INTEGER
   }, {
