@@ -1,10 +1,9 @@
 require("dotenv").config();
 
-const Transaction = require("../models/transaction");
 const models = require("../models");
 const { where } = require("sequelize");
-const Salary = require("../models/salary");
-const Expanditure = require("../models/expanditure");
+// const Salary = require("../models/salary");
+// const Expanditure = require("../models/expanditure");
 // const { Pool }    = require('pg')
 // const pool        = new Pool()
 
@@ -27,16 +26,17 @@ const index = async (req, res) => {
 };
 
 const show = async (req, res) => {
-  let request = req.params;
-  console.log(request);
+  const { id } = req.params;
+  console.log(id);
   try {
-    if (!request) return res.sendStatus(204);
-    let data = await models.Transaction.findOne({
-      where: {
-        id: request.id,
-      },
-    });
+    if (!id) return res.sendStatus(204);
+    // let data = await models.Transaction.findOne({
+    //   where: {
+    //     id: id,
+    //   },
+    // });
 
+    let data = await models.Transaction.findByPk(id);
     return res.status(200).json({
       status: "success",
       data: data,
