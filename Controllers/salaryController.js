@@ -7,10 +7,13 @@ const index = async (req, res) => {
   try {
     let datas = await models.Salary.findAll();
 
-    // if(datas)
-    // {
-    //     console.log(123);
-    // }
+    if(!datas)
+    {
+        return res.status(404).json({
+            status: "error",
+            message: "Data not found"
+        })
+    }
     // else{
     //     return res.status(404).json({
     //         status: "error",
@@ -68,7 +71,7 @@ const insert = async (req, res) => {
         amount      : request.amount,
         date        : request.date
     });
-    
+
     return res.status(200).json({
       status: "success",
       data: data,
