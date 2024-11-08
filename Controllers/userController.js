@@ -10,7 +10,7 @@ const models = require("../models");
 // app.use(express.json());
 
 function generateAccessToken(user) {
-  return jwt.sign(user, process.env.ACCESS_TOKEN_SECRET, { expiresIn: "2h" });
+  return jwt.sign(user, process.env.ACCESS_TOKEN_SECRET, { expiresIn: process.env.EXPIRED_TOKEN });
 }
 
 const signup = async (req, res) => {
