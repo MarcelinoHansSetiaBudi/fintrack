@@ -21,7 +21,7 @@ const signup = async (req, res) => {
     let user = await models.User.create({
       name: req.body.name,
       email: req.body.email,
-      role: req.body.role,
+      roleId: req.body.roleId,
       password: hashPassword,
       // createdAt: new Date(),
       // updatedAt: new Date(),
@@ -59,7 +59,7 @@ const login = async (req, res) => {
           let token = generateAccessToken({
             name: user.name,
             email: user.email,
-            role: user.role,
+            roleId: user.roleId,
           });
           return res.status(200).json({
             token: token,
