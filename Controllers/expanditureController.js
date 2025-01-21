@@ -44,7 +44,6 @@ const insert = async (req, res) => {
   let request = req.body;
   try {
     if (!request) {
-      console.log(123);
       return res.status(404).json({
         status: "error",
         message: "Data not found",
